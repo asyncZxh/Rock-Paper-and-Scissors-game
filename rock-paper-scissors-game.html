@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <style>
+      body {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        height: 100vh;
+      }
+
+      body button {
+        cursor: pointer;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      p {
+        font-size: 15px;
+      }
+      .buttons {
+        display: flex;
+        gap: 20px;
+      }
+
+      .buttons button {
+        transition: transform 0.3s;
+      }
+
+      .buttons button:hover {
+        transform: scale(1.05);
+      }
+
+      .score-board {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Rock Paper Scissor</h2>
+    <div style="width: fit-content; margin: auto">
+      <div class="buttons">
+        <button onclick="rock()">Rock</button>
+        <button onclick="paper()">Paper</button>
+        <button onclick="scissors()">Scissors</button>
+      </div>
+      <div class="score-board">
+        <p>Player: <span id="player-score">0</span></p>
+        <p>Computer: <span id="computer-score">0</span></p>
+      </div>
+      <div>
+        <p style="text-align: center; margin-right: 50px">
+          Tie: <span id="tie-score">0</span>
+        </p>
+      </div>
+    </div>
+    <script src="/project-3/conditions.js"></script>
+  </body>
+</html>
