@@ -1,12 +1,7 @@
-let playerPick = "";
-let computerPick = "";
 let playerWins = 0;
 let computerWins = 0;
 let tieCounter = 0;
 let result = "";
-let r = "rock";
-let p = "paper";
-let s = "scissor";
 const playerScore = document.getElementById("player-score");
 const compuerScore = document.getElementById("computer-score");
 const tieScore = document.getElementById("tie-score");
@@ -15,46 +10,28 @@ function computerChoice() {
   const number = Math.random();
   let pick = "";
   if (number >= 0 && number < 1 / 3) {
-    pick = r;
-    console.log("Computer: Rock");
+    pick = "Rock";
+    console.log(`Computer: ${pick}`);
   } else if (number >= 1 / 3 && number < 2 / 3) {
-    pick = p;
-    console.log("Computer: Paper");
+    pick = "Paper";
+    console.log(`Computer: ${pick}`);
   } else if (number >= 2 / 3 && number <= 1) {
-    pick = s;
-    console.log("Computer: Scissors");
+    pick = "Scissors";
+    console.log(`Computer: ${pick}`);
   }
 
   return pick;
 }
 
-function rock() {
-  playerPick = r;
-  console.log("Player: Rock");
-  process();
-}
-
-function paper() {
-  playerPick = p;
-  console.log("Player: Paper");
-  process();
-}
-
-function scissors() {
-  playerPick = s;
-  console.log("Player: Scissors");
-  process();
-}
-
-function checkWinner() {
+function checkWinner(playerPick, computerPick) {
   switch (playerPick) {
-    case "rock":
-      if (computerPick === r) {
+    case "Rock":
+      if (computerPick === "Rock") {
         result = "Tie!";
         tieCounter++;
         tieScore.textContent = tieCounter;
         console.log("Tie!");
-      } else if (computerPick === p) {
+      } else if (computerPick === "Paper") {
         result = "Computer Win!";
         computerWins++;
         compuerScore.textContent = computerWins;
@@ -67,13 +44,13 @@ function checkWinner() {
       }
       break;
 
-    case "paper":
-      if (computerPick === r) {
+    case "Paper":
+      if (computerPick === "Rock") {
         result = "Player Win!";
         playerWins++;
         console.log("Player Win!");
         playerScore.textContent = playerWins;
-      } else if (computerPick === p) {
+      } else if (computerPick === "Paper") {
         result = "Tie!";
         tieCounter++;
         tieScore.textContent = tieCounter;
@@ -86,7 +63,7 @@ function checkWinner() {
       }
       break;
 
-    case "scissor":
+    case "Scissors":
       if (computerPick === r) {
         result = "Computer Win!";
         computerWins++;
@@ -107,9 +84,10 @@ function checkWinner() {
   }
 }
 
-function process() {
-  computerPick = computerChoice();
-  checkWinner();
+function play(playerChoice) {
+  const playerPick = playerChoice;
+  const computerPick = computerChoice();
+  checkWinner(playerPick, computerPick);
   console.log(`Player Wins: ${playerWins}`);
   console.log(`Computer Wins: ${computerWins}`);
   console.log(`Tie: ${tieCounter}`);
