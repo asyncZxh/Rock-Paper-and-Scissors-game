@@ -102,3 +102,26 @@ function play(playerChoice) {
   alert(`Computer pick: ${computerPick}`);
   alert(`Result: ${result}`);
 }
+
+function resetScore() {
+  if (
+    scoring.player.wins !== 0 ||
+    scoring.computer.wins !== 0 ||
+    scoring.tieCounter !== 0
+  ) {
+    scoring.player.wins = 0;
+    scoring.computer.wins = 0;
+    scoring.tieCounter = 0;
+    console.log("Score reset!");
+    console.log(`Player: ${scoring.player.wins}`);
+    console.log(`Computer: ${scoring.computer.wins}`);
+    console.log(`Tie: ${scoring.tieCounter}`);
+    playerScore.textContent = scoring.player.wins;
+    computerScore.textContent = scoring.computer.wins;
+    tieScore.textContent = scoring.tieCounter;
+    alert(`Score Reset!
+Player: ${scoring.player.wins}
+Computer: ${scoring.computer.wins}
+Tie: ${scoring.tieCounter}`);
+  } else return;
+}
