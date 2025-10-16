@@ -1,4 +1,5 @@
-const scoring = {
+const storedData = JSON.parse(localStorage.getItem("score"));
+const scoring = storedData || {
   player: {
     wins: 0,
   },
@@ -7,10 +8,14 @@ const scoring = {
   },
   tieCounter: 0,
 };
-let result = "";
 const playerScore = document.getElementById("player-score");
 const computerScore = document.getElementById("computer-score");
 const tieScore = document.getElementById("tie-score");
+
+console.log(scoring);
+playerScore.textContent = scoring.player.wins;
+computerScore.textContent = scoring.computer.wins;
+tieScore.textContent = scoring.tieCounter;
 
 function computerChoice() {
   const number = Math.random();
@@ -30,6 +35,7 @@ function computerChoice() {
 }
 
 function checkWinner(playerPick, computerPick) {
+  let result = "";
   switch (playerPick) {
     case "Rock":
       if (computerPick === "Rock") {
@@ -88,19 +94,22 @@ function checkWinner(playerPick, computerPick) {
       }
       break;
   }
+
+  return result;
 }
 
 function play(playerChoice) {
   const playerPick = playerChoice;
   const computerPick = computerChoice();
-  checkWinner(playerPick, computerPick);
+  const winner = checkWinner(playerPick, computerPick);
   console.log(`Player Wins: ${scoring.player.wins}`);
   console.log(`Computer Wins: ${scoring.computer.wins}`);
   console.log(`Tie: ${scoring.tieCounter}`);
   console.log("---------------------------");
   alert(`Player pick: ${playerPick}`);
   alert(`Computer pick: ${computerPick}`);
-  alert(`Result: ${result}`);
+  alert(`Result: ${winner}`);
+  localStorage.setItem("score", JSON.stringify(scoring));
 }
 
 function resetScore() {
@@ -121,7 +130,10 @@ function resetScore() {
     tieScore.textContent = scoring.tieCounter;
     alert(`Score Reset!
 Player: ${scoring.player.wins}
-Computer: ${scoring.computer.wins}
+Computer: ${scoring.computer.wins}  
 Tie: ${scoring.tieCounter}`);
-  } else return;
+    localStorage.removeItem("score");
+  }
+
+  return;
 }
